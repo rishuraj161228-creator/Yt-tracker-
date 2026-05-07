@@ -2,7 +2,7 @@ import requests
 import time
 from datetime import datetime
 
-# Dhyan dein: Yahan apni API key zaroor dalein!
+# Yahan apni API Key daalna mat bhoolna!
 API_KEY = "AIzaSyAF-LTCTYCI6X71tLktuwlL2xSRmNrJYJo" 
 VIDEO_ID = "VKBtenfifHI"
 
@@ -14,7 +14,6 @@ while True:
     try:
         response = requests.get(URL).json()
         
-        # Check karega ki YouTube ne kya jawab diya
         if 'error' in response:
             print("API Key ya limit ka Error:", response['error']['message'], flush=True)
         elif 'items' in response and len(response['items']) == 0:
@@ -24,7 +23,11 @@ while True:
             current_time = datetime.now().strftime("%I:%M %p")
             print(f"{current_time} Views: {views}", flush=True)
         
-        time.sleep(300) 
+        # Naya Smart Timer: Yeh time ko 00, 05, 10, 15 par lock karega
+        now = datetime.now()
+        seconds_to_wait = 300 - ((now.minute % 5) * 60 + now.second)
+        time.sleep(seconds_to_wait)
+        
     except Exception as e:
         print("Kuch aur error aaya:", e, flush=True)
         time.sleep(60)
