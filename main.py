@@ -12,16 +12,16 @@ URL = f"https://www.googleapis.com/youtube/v3/videos?part=statistics&id={VIDEO_I
 
 purane_views = None
 
-# Yeh function numbers ko K ya M mein badal dega
+# Yeh function sirf naye badhe hue views ko K ya M mein badlega
 def format_k(number):
     if number >= 1000000:
-        return f"{number / 1000000:.1f}M"  # 1 Million se upar ke liye
+        return f"{number / 1000000:.1f}M"
     elif number >= 1000:
-        return f"{number / 1000:.1f}K"     # 1 Thousand se upar ke liye
+        return f"{number / 1000:.1f}K"
     else:
-        return str(number)                 # 1000 se kam ho toh normal dikhayega
+        return str(number)
 
-print("Smart 'K' Tracker Started...", flush=True)
+print("Custom View Tracker Started...", flush=True)
 
 while True:
     try:
@@ -32,12 +32,13 @@ while True:
             aaj_ke_views = int(response['items'][0]['statistics']['viewCount'])
             
             if purane_views is None:
-                print(f"{current_time} Views: {format_k(aaj_ke_views)}  (Tracking shuru...)", flush=True)
+                # Total views poore number mein dikhenge
+                print(f"{current_time} Views: {aaj_ke_views}  (Tracking shuru...)", flush=True)
             else:
                 naye_aaye_views = aaj_ke_views - purane_views
                 
-                # Total aur naye views dono ko format_k ke through nikalna
-                print(f"{current_time} Views: {format_k(aaj_ke_views)}  (+{format_k(naye_aaye_views)} naye views)", flush=True)
+                # Total views poore number mein, aur naye views format_k ke through 'K' mein
+                print(f"{current_time} Views: {aaj_ke_views}  (+{format_k(naye_aaye_views)} naye views)", flush=True)
             
             purane_views = aaj_ke_views
         else:
@@ -51,3 +52,4 @@ while True:
     except Exception as e:
         print("Error aaya:", e, flush=True)
         time.sleep(60)
+        
