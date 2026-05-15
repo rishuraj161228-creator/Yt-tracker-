@@ -6,7 +6,7 @@ from datetime import datetime
 API_KEY = "AIzaSyAF-LTCTYCI6X71tLktuwlL2xSRmNrJYJo" 
 
 # 2. Yahan apni ek Video ki ID dalein
-VIDEO_ID = "rcOrt7SNAnU"
+VIDEO_ID = "941zQuf-i-M"
 
 URL = f"https://www.googleapis.com/youtube/v3/videos?part=statistics&id={VIDEO_ID}&key={API_KEY}"
 
